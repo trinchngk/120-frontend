@@ -1,0 +1,128 @@
+/* Colors to use:
+    #091933 - Darkest Blue, use for large backgrounds
+    #123e7b - Dark Blue, use for smaller backgrounds
+    #0bbdc7 - Light Blue, use for pop. borders, text, etc 
+    #ea00d9 - Light Pink, use for pop. borders, text, etc 
+    #711c91 - Purple, can be out primary color for buttons
+
+    These are not exclusive choices for the site, we can use black and white when needed
+    and utilize different shades if something does not look good
+
+*/
+
+@font-face {
+    font-family: IcelandRegular;
+    src: url(fonts/Iceland-Regular.ttf);
+}
+
+body {
+    font-family: IcelandRegular;
+    background-color: #091933;
+    color: white;
+}
+
+/* Styling for top of each page, header for both the logo and topnav. They also have their own independant divs */
+#logo {
+    width: 100%;
+    text-align: center;
+    background-image: radial-gradient(#123e7b, #091933);
+}
+#topnav {
+    background-color: #431155;
+    overflow: hidden;
+}
+
+#topnav a {
+    float: left;
+    color: white;
+    background-color: #711c91;
+    text-align: center;
+    padding: 0.6% 5%;
+    text-decoration: none;
+    font-size: 1vw;
+}
+
+#topnav a:hover {
+    color: #711c91;
+    background-color: white;
+}
+
+/* These are the main titles on the index page, can be changed to be exclusive for the main page so
+    others can have their own but this can help with consistency
+*/
+h2 {
+    text-align: center;
+    font-size: 3vw;
+}
+
+#about,#signup {
+    border: 2px solid #0bbdc7;
+}
+#features {
+    border: 2px solid #ea00d9;
+}
+
+#about,#signup,#features {
+    margin: 3%;
+}
+
+/* paragraphs for about and signup section */
+#about p, #signup p {
+    text-align: center;
+    font-size: 2vw;
+    border-radius: 15px;
+    background-color: #091f3f;
+    padding: 2%;
+    margin-bottom: 0;
+}
+
+/* grid used to show features, easy to display the 3 side by side */
+#featureGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5%;
+
+    margin-left: auto;
+    margin-right: auto;
+    max-width: fit-content;
+
+}
+
+.featureItem {
+    text-align: center;
+    border-radius: 10px;
+    padding: 5%;
+    margin-left: 10%;
+    margin-right: 10%;
+    background-color: #091f3f;
+}
+.featureItem img{
+    width: 200px;
+    height: 200px;
+}
+
+.featureItem h3{
+    font-size: 2vw;
+}
+
+.featureItem p{
+    font-size: 1vw;
+}
+
+/* styling for buttons separate from normal buttons in case we need them somewhere else */
+#signup button {
+    background-color: #711c91;
+    color: white;
+    font-size: 1vw;
+    margin: 1%;
+    padding: 1%;
+    width: 10%;
+    border: 2px solid white;
+    border-radius: 30px;
+}
+
+#signup button:hover {
+    background-color: white;
+    color: #711c91;
+    border: 2px solid #711c91;
+}
