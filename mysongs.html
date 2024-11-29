@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>VibeZ : My Songs</title>
+    <link rel="stylesheet" href="FinalProject.css">
+</head>
+<body>
+    <!-- Top part of each page, includes logo and top navigation -->
+    <div id="header">
+        <div id="logo">
+            <a href="index.html"><img src="images/VibeZ.png"></a>
+        </div>
+        <div id="topnav">
+            <a href="index.html">Home</a>
+            <a href="mysongs.html" class="active"> My Songs </a>
+            <a href="browse.html"> Browse All </a>
+            <a href="speedsearch.html"> Speed Search </a>
+        </div>
+    </div>
+        <div class="content">
+            <h2> My Songs </h2>
+            <div class="toggleButtonDiv">
+                <button class="toggleButton" onclick="toggleGrid()">Change View</button>
+            </div>
+            <hr class="songs">
+            <div class="songGrid">
+                <!-- song card is used to display a card version of the song -->
+                <div class="songCard">
+                    <!-- required for display, albumImage:songName:artistName:release the url for spotify is an optional thing to discuss -->
+                    <img src="images/RickAstley.jpg">
+                    <h3> Never Gonna Give You Up </h3>
+                    <p> Rick Astley, 1987</p>
+                </div>
+            </div>
+        </div>
+    
+<script>
+function toggleGrid() {
+    const collection = document.getElementsByClassName("songCard");
+    for (let element of collection){
+        element.classList.toggle("songLine");
+    }
+}
+</script>
+</body>
+</html>
