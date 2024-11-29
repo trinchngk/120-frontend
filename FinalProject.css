@@ -1,9 +1,16 @@
 /* Colors to use:
-    #091933 - Darkest Blue, use for large backgrounds
-    #123e7b - Dark Blue, use for smaller backgrounds
-    #0bbdc7 - Light Blue, use for pop. borders, text, etc 
-    #ea00d9 - Light Pink, use for pop. borders, text, etc 
-    #711c91 - Purple, can be out primary color for buttons
+    #1a061a - Darkest Purple
+    #39093f - Dark Purple
+    #840052 - Dark Pink
+    #cb118b - Pink
+    #ec67b6 - Light Pink
+    #8b62c2 - Light Purple
+    #572aa4 - Purple
+    #25188a - Blue
+    #160259 - Dark Blue
+    #23b1ca - Light Blue
+    #3c6176 - Muted Blue Green
+
 
     These are not exclusive choices for the site, we can use black and white when needed
     and utilize different shades if something does not look good
@@ -17,34 +24,8 @@
 
 body {
     font-family: IcelandRegular;
-    background-color: #091933;
+    background-color: #1a061a;
     color: white;
-}
-
-/* Styling for top of each page, header for both the logo and topnav. They also have their own independant divs */
-#logo {
-    width: 100%;
-    text-align: center;
-    background-image: radial-gradient(#123e7b, #091933);
-}
-#topnav {
-    background-color: #431155;
-    overflow: hidden;
-}
-
-#topnav a {
-    float: left;
-    color: white;
-    background-color: #711c91;
-    text-align: center;
-    padding: 0.6% 5%;
-    text-decoration: none;
-    font-size: 1vw;
-}
-
-#topnav a:hover {
-    color: #711c91;
-    background-color: white;
 }
 
 /* These are the main titles on the index page, can be changed to be exclusive for the main page so
@@ -53,13 +34,55 @@ body {
 h2 {
     text-align: center;
     font-size: 3vw;
+    text-decoration: underline ;
+    margin-bottom: 0;
 }
 
+hr.songs {
+    border: 1px solid #3c6176;
+    width: 90%;
+}
+
+/* Styling for top of each page, header for both the logo and topnav. They also have their own independant divs */
+#logo {
+    width: 100%;
+    text-align: center;
+    background-color: #3c6176;
+}
+
+#logo img {
+    scale: 1.2;
+}
+#topnav {
+    background-color: #39093f;
+    overflow: hidden;
+}
+
+#topnav a {
+    float: left;
+    color: white;
+    background-color: #840052;
+    text-align: center;
+    padding: 0.6% 5%;
+    text-decoration: none;
+    font-size: 1vw;
+}
+
+#topnav a:hover {
+    color: #840052;
+    background-color: white;
+}
+
+#topnav .active {
+    background-color: #39093f;
+}
+
+/* Styling for the sections on the Index page */
 #about,#signup {
-    border: 2px solid #0bbdc7;
+    border: 2px solid #23b1ca;
 }
 #features {
-    border: 2px solid #ea00d9;
+    border: 2px solid #db1696;
 }
 
 #about,#signup,#features {
@@ -71,7 +94,7 @@ h2 {
     text-align: center;
     font-size: 2vw;
     border-radius: 15px;
-    background-color: #091f3f;
+    background-color: #0a0029;
     padding: 2%;
     margin-bottom: 0;
 }
@@ -85,16 +108,17 @@ h2 {
     margin-left: auto;
     margin-right: auto;
     max-width: fit-content;
+    padding: 2%;
 
 }
 
+/* styling for the feature grid section to make 3 cards */
 .featureItem {
     text-align: center;
     border-radius: 10px;
     padding: 5%;
-    margin-left: 10%;
-    margin-right: 10%;
-    background-color: #091f3f;
+    margin-bottom: 5%;
+    background-color: #0a0029;
 }
 .featureItem img{
     width: 200px;
@@ -110,8 +134,8 @@ h2 {
 }
 
 /* styling for buttons separate from normal buttons in case we need them somewhere else */
-#signup button {
-    background-color: #711c91;
+#signup button, .toggleButton {
+    background-color: #840052;
     color: white;
     font-size: 1vw;
     margin: 1%;
@@ -121,8 +145,79 @@ h2 {
     border-radius: 30px;
 }
 
-#signup button:hover {
+#signup button:hover, .toggleButton:hover {
     background-color: white;
-    color: #711c91;
-    border: 2px solid #711c91;
+    color: #840052;
+    border: 2px solid #840052;
 }
+
+.toggleButtonDiv {
+    text-align: center;
+}
+
+/* styling for the song grid, should be usable in both browse songs page and my songs page  */
+
+.songGrid {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+/* song card is for card display */
+.songCard, .songLine {
+    border-radius: 10px;
+    padding: 1%;
+    text-align: center;
+    background-color: #091f3f;
+    margin: 0.5%;
+}
+.songCard:nth-child(3n+1), .songLine:nth-child(3n+1){
+    border: 2px solid #ea68b6;
+}
+.songCard:nth-child(3n+2), .songLine:nth-child(3n+2){
+    border: 2px solid #8b62c2;
+}
+.songCard:nth-child(3n+3), .songLine:nth-child(3n+3){
+    border: 2px solid #23b1ca;
+}
+
+.songCard img {
+    width: 17vw;
+}
+.songCard h3 {
+    font-size: 1.8vw;
+}
+.songCard p {
+    font-size: 1.5vw;
+    font-style: italic;
+}
+
+/* song line is for line display, shares some qualities with card*/
+.songLine {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    box-sizing: border-box;
+}
+.songLine img {
+    width: 7vw;
+}
+.songLine h3, .songLine p {
+    font-size: 2vw;
+    margin: 0;
+    padding: 0 10px;
+}
+
+#searchBar {
+    margin-top: 0.5%;
+    margin-bottom: 1%;
+    text-align: center;
+}
+#searchBar input {
+    border-radius: 100px;
+    border: 2px solid #840052;
+    text-align: center;
+    font-size: 2vw;
+}
+
