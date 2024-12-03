@@ -43,7 +43,7 @@
                     let parsedData = JSON.parse(data);
                     console.log(parsedData)
                     parsedData.data.forEach(song => {
-                        document.getElementById("songGrid1").insertAdjacentHTML("beforeend", "<div class='songCard'> <img src=' " + song.album.cover + "'> <h3>" + song.title + "</h3> <p>" + song.artist.name + 
+                        document.getElementById("songGrid1").insertAdjacentHTML("beforeend", "<div class='songCard'> <img src=' " + song.album.cover_medium + "'> <h3>" + song.title + "</h3> <p>" + song.artist.name + 
                             "</p> <audio controls> <source src='" + song.preview + "' type='audio/mpeg'></div>")
                     });
                 })
