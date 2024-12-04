@@ -248,6 +248,6 @@ hr.songs {
 
 .songCard audio {
     display: inline-block; 
-    width: calc(100% - 4rem); 
+    width: calc(100% - 5rem); 
 }
 
