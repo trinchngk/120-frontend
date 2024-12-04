@@ -230,7 +230,6 @@ hr.songs {
     padding: 1%;
     width: 10%;
     border: 2px solid white;
-    border-radius: 30px;
 }
 .songCard button:hover {
     background-color: white;
