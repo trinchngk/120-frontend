@@ -228,7 +228,6 @@ hr.songs {
     font-size: 1vw;
     margin: 1%;
     padding: 1%;
-    width: 10%;
     border: 2px solid white;
 }
 .songCard button:hover {
