@@ -255,6 +255,7 @@ hr.songs {
 }
 
 .songLine audio {
+    width: 20%;
     margin-right: 1rem;
 }
 
