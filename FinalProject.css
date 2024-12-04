@@ -225,16 +225,21 @@ hr.songs {
 .songCard button {
     background-color: #840052;
     color: white;
-    font-size: 2vw;
-    margin: 1%;
-    padding: 1%;
+    font-size: 1.5rem; 
+    width: 3rem; 
+    height: 3rem;
     border: 2px solid white;
-    width: 10%;
-    height: 5%;
-    border-radius: 40%;
+    border-radius: 50%; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1%;
+    cursor: pointer; 
 }
+
 .songCard button:hover {
     background-color: white;
     color: #840052;
     border: 2px solid #840052;
 }
+
