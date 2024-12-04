@@ -234,7 +234,6 @@ hr.songs {
     align-items: center;
     justify-content: center;
     margin: 1%;
-    cursor: pointer; 
     float: right;
     margin-left: 1rem;
     
@@ -250,4 +249,10 @@ hr.songs {
     display: inline-block; 
     width: calc(100% - 5rem); 
 }
+
+.songLine audio {
+    display: inline-block; 
+    width: 20%; 
+}
+
 
