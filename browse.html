@@ -20,8 +20,8 @@
     </div>
         <div class="content">
             <h2> Browse Songs </h2>
-            <div id="searchBar">
-                <input type="text" placeholder="Search by song name...">
+            <div id="genreBar">
+                
             </div>
             <div class="toggleButtonDiv">
                 <button class="toggleButton" onclick="toggleGrid()">Change View</button>
@@ -38,6 +38,19 @@
             </div>
         </div>
         <script>
+            url = "https://harmeets.sgedu.site/genres.php";
+            fetch(url)
+                .then(res => res.text())
+                .then (data => 
+                {
+                    let parsedData = JSON.parse(data);
+                    console.log(parsedData)
+                    parsedData.data.forEach(genre => {
+                        document.getElementById("genreBar").insertAdjacentHTML("beforeend", "<button>" + genre.name +"</button>")
+                    });
+                })
+            .catch (error => console.log(error));
+
             url = "https://harmeets.sgedu.site/proxy.php";
             fetch(url)
                 .then(res => res.text())
