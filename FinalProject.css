@@ -253,6 +253,7 @@ hr.songs {
 .songLine audio {
     display: inline-block; 
     width: 20%; 
+    float: right;
 }
 
 
