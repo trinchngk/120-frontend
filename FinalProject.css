@@ -134,7 +134,7 @@ hr.songs {
 }
 
 /* styling for buttons separate from normal buttons in case we need them somewhere else */
-#signup button, .toggleButton, .songCard button {
+#signup button, .toggleButton {
     background-color: #840052;
     color: white;
     font-size: 1vw;
@@ -222,3 +222,18 @@ hr.songs {
     font-size: 2vw;
 }
 
+.songCard button {
+    background-color: #840052;
+    color: white;
+    font-size: 1vw;
+    margin: 1%;
+    padding: 1%;
+    width: 10%;
+    border: 2px solid white;
+    border-radius: 30px;
+}
+.songCard button:hover {
+    background-color: white;
+    color: #840052;
+    border: 2px solid #840052;
+}
