@@ -134,7 +134,7 @@ hr.songs {
 }
 
 /* styling for buttons separate from normal buttons in case we need them somewhere else */
-#signup button, .toggleButton {
+#signup button, .toggleButton, .songCard button {
     background-color: #840052;
     color: white;
     font-size: 1vw;
