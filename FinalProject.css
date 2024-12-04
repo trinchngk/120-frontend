@@ -200,14 +200,18 @@ hr.songs {
     align-items: center;
     width: 90%;
     box-sizing: border-box;
+    padding: 0 10px;
 }
 .songLine img {
     width: 7vw;
+    margin-right: 1rem;
 }
 .songLine h3, .songLine p {
     font-size: 2vw;
     margin: 0;
-    padding: 0 10px;
+    padding: 0;
+    flex: 1;
+    text-align: center;
 }
 
 #searchBar {
@@ -251,9 +255,7 @@ hr.songs {
 }
 
 .songLine audio {
-    display: inline-block; 
-    width: 20%; 
-    float: right;
+    margin-right: 1rem;
 }
 
 
