@@ -235,11 +235,19 @@ hr.songs {
     justify-content: center;
     margin: 1%;
     cursor: pointer; 
+    float: right;
+    margin-left: 1rem;
+    
 }
 
 .songCard button:hover {
     background-color: white;
     color: #840052;
     border: 2px solid #840052;
+}
+
+.songCard audio {
+    display: inline-block; 
+    width: calc(100% - 4rem); 
 }
 
