@@ -170,6 +170,7 @@ hr.songs {
     text-align: center;
     background-color: #091f3f;
     margin: 0.5%;
+    max-width: 22.5%;
 }
 .songCard:nth-child(3n+1), .songLine:nth-child(3n+1){
     border: 2px solid #ea68b6;
