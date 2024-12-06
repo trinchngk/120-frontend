@@ -2,6 +2,8 @@
 <html>
 <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VibeZ : Browse</title>
     <link rel="stylesheet" href="FinalProject.css">
 </head>
@@ -36,40 +38,72 @@
                     <p> Rick Astley, 1987</p>
                 </div> -->
             </div>
+            <div id="songPages">
+
+            </div>
         </div>
         <script>
-            url = "https://harmeets.sgedu.site/genres.php";
-            fetch(url)
-                .then(res => res.text())
-                .then (data => 
-                {
-                    let parsedData = JSON.parse(data);
-                    console.log(parsedData)
-                    parsedData.data.forEach(genre => {
-                        document.getElementById("genreBar").insertAdjacentHTML("beforeend", "<button>" + genre.name +"</button>")
-                    });
-                })
-            .catch (error => console.log(error));
+            // fetch genres for buttons
+            genreButtons();
+            // fetch default songs
+            getSongs(0);
 
-            url = "https://harmeets.sgedu.site/proxy.php";
-            fetch(url)
-                .then(res => res.text())
-                .then (data => 
-                {
-                    let parsedData = JSON.parse(data);
-                    console.log(parsedData)
-                    parsedData.data.forEach(song => {
-                        document.getElementById("songGrid1").insertAdjacentHTML("beforeend", "<div class='songCard'> <img src=' " + song.album.cover_medium + "'> <h3>" + song.title + "</h3> <p>" + song.artist.name + 
-                            "</p> <audio controls> <source src='" + song.preview + "' type='audio/mpeg'> </audio> <button> &hearts; </button> </div>")
-                    });
-                })
-            .catch (error => console.log(error));
+
+            function genreButtons() {
+                url = "https://harmeets.sgedu.site/genre.php?=" + Date.now();
+                fetch(url)
+                    .then(res => res.text())
+                    .then (data => 
+                    {
+                        let parsedData = JSON.parse(data);
+                        parsedData.data.forEach(genre => {
+                            document.getElementById("genreBar").insertAdjacentHTML("beforeend", "<button onclick='getSongs(" +  genre.id + ")'>" + genre.name +"</button>")
+                        });
+                    })
+            }
             
             function toggleGrid() {
                 const collection = document.getElementsByClassName("songCard");
                 for (let element of collection){
                     element.classList.toggle("songLine");
                 }
+            }
+
+            // reset songs and display picked genre
+            function getSongs(genre){
+                while (document.getElementById("songGrid1").firstChild) {
+                    document.getElementById("songGrid1").removeChild(document.getElementById("songGrid1").firstChild);
+                }
+                while (document.getElementById("songPages").firstChild) {
+                    document.getElementById("songPages").removeChild(document.getElementById("songPages").firstChild);
+                }
+                url = "https://harmeets.sgedu.site/song.php?id=" + genre + "&?date=" + Date.now();
+                updatePage(url,genre);
+            }
+
+            function updatePage(url,genre){
+                fetch (url)
+                .then(res => res.text())
+                .then (data => 
+                {
+                    let parsedData = JSON.parse(data);
+                    parsedData.data.forEach(song => {
+                        document.getElementById("songGrid1").insertAdjacentHTML("beforeend", "<div class='songCard'> <img src=' " + song.album.cover_medium + "'> <h3>" + song.title_short + "</h3> <p>" + song.artist.name + 
+                            "</p> <audio controls> <source src='" + song.preview + "' type='audio/mpeg'> </audio> <button> &hearts; </button> </div>")
+                    });
+                    if (parsedData.prev) {
+                        document.getElementById("songPages").insertAdjacentHTML("beforeend", "<button onclick='goThere(0," + genre +")'> Previous </button>");
+                    }
+                    if (parsedData.next) {
+                        document.getElementById("songPages").insertAdjacentHTML("beforeend", "<button onclick='goThere(1," + genre +");'> Next </button>");
+                    }
+                })
+            }
+
+            function goThere(direction, genre){
+                url = "https://harmeets.sgedu.site/goThere.php?direction=" + direction + "&genre=" + genre + "&date=" + Date.now();
+                console.log(url);
+                
             }
             </script>
 </body>

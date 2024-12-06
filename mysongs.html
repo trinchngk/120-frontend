@@ -24,18 +24,31 @@
                 <button class="toggleButton" onclick="toggleGrid()">Change View</button>
             </div>
             <hr class="songs">
-            <div class="songGrid">
+            <div class="songGrid" id="songGrid1">
                 <!-- song card is used to display a card version of the song -->
-                <div class="songCard">
+                <!-- <div class="songCard"> -->
                     <!-- required for display, albumImage:songName:artistName:release the url for spotify is an optional thing to discuss -->
-                    <img src="images/RickAstley.jpg">
+                    <!-- <img src="images/RickAstley.jpg">
                     <h3> Never Gonna Give You Up </h3>
                     <p> Rick Astley, 1987</p>
-                </div>
+                </div> -->
             </div>
         </div>
     
 <script>
+url = "https://cs120-final-project.vercel.app/api/songs";
+fetch(url)
+    .then(res => res.text())
+    .then (data => 
+    {
+        let parsedData = JSON.parse(data);
+        console.log(parsedData)
+        parsedData.data.forEach(song => {
+            document.getElementById("songGrid1").insertAdjacentHTML("beforeend", "<div class='songCard'> <img src=' " + song.cover + "'> <h3>" + song.title + "</h3> <p>" + song.artist + ", " + song.published + "</p></div>")
+        });
+    })
+.catch (error => console.log(error));
+
 function toggleGrid() {
     const collection = document.getElementsByClassName("songCard");
     for (let element of collection){
