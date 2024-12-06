@@ -43,11 +43,14 @@
             </div>
         </div>
         <script>
+            let currentIndex = 0;
             // fetch genres for buttons
             genreButtons();
             // fetch default songs
-            getSongs(0);
+            getSongsByGenre(0);
 
+            // used for page navigation
+            
 
             function genreButtons() {
                 url = "https://harmeets.sgedu.site/genre.php?=" + Date.now();
@@ -57,7 +60,7 @@
                     {
                         let parsedData = JSON.parse(data);
                         parsedData.data.forEach(genre => {
-                            document.getElementById("genreBar").insertAdjacentHTML("beforeend", "<button onclick='getSongs(" +  genre.id + ")'>" + genre.name +"</button>")
+                            document.getElementById("genreBar").insertAdjacentHTML("beforeend", "<button onclick='getSongsByGenre(" +  genre.id + ")'>" + genre.name +"</button>")
                         });
                     })
             }
@@ -70,15 +73,11 @@
             }
 
             // reset songs and display picked genre
-            function getSongs(genre){
-                while (document.getElementById("songGrid1").firstChild) {
-                    document.getElementById("songGrid1").removeChild(document.getElementById("songGrid1").firstChild);
-                }
-                while (document.getElementById("songPages").firstChild) {
-                    document.getElementById("songPages").removeChild(document.getElementById("songPages").firstChild);
-                }
+            function getSongsByGenre(genre){
+                resetPage();
                 url = "https://harmeets.sgedu.site/song.php?id=" + genre + "&?date=" + Date.now();
                 updatePage(url,genre);
+                currentIndex = 0;
             }
 
             function updatePage(url,genre){
@@ -100,9 +99,25 @@
                 })
             }
 
+            function resetPage(){
+                while (document.getElementById("songGrid1").firstChild) {
+                    document.getElementById("songGrid1").removeChild(document.getElementById("songGrid1").firstChild);
+                }
+                while (document.getElementById("songPages").firstChild) {
+                    document.getElementById("songPages").removeChild(document.getElementById("songPages").firstChild);
+                }
+            }
+
             function goThere(direction, genre){
-                url = "https://harmeets.sgedu.site/goThere.php?direction=" + direction + "&genre=" + genre + "&date=" + Date.now();
-                console.log(url);
+                url = "https://harmeets.sgedu.site/goThere.php?direction=" + direction + "&genre=" + genre + "&date=" + Date.now() + "&index=" + currentIndex;
+                if (direction == 1){
+                    currentIndex = currentIndex + 12;
+                }
+                else {
+                    currentIndex = currentIndex - 12;
+                }
+                resetPage();
+                updatePage(url,genre);
                 
             }
             </script>
