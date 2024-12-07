@@ -2,8 +2,11 @@
 <html>
 <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vibez: Speed Search</title>
     <link rel="stylesheet" href="FinalProject.css">
+    <script src="finalProject.js"></script>
 </head>
 <body>
     <div id="header">
@@ -16,6 +19,31 @@
             <a href="browse.html"> Browse All </a>
             <a href="speedsearch.html" class="active"> Speed Search </a>
         </div>
+        <div class="content">
+            <h2> Speed Search </h2>
+            <hr class="songs">
+            <div class="songGrid" id="songGrid1">
+
+            </div>
+        </div>
     </div>
 </body>
+<script>
+    getRandomSong();
+    function getRandomSong(){
+        randomNumber = Math.floor(Math.random() * 101);
+        url = "https://harmeets.sgedu.site/getRandomSong.php?&date=" + Date.now() + "&random=" + randomNumber;
+        fetch (url)
+        .then(res => res.text())
+        .then (data => 
+        {
+            let parsedData = JSON.parse(data);
+            parsedData.data.forEach(song => {
+                document.getElementById("songGrid1").insertAdjacentHTML("beforeend", "<div class='songCard'> <img src=' " + song.album.cover_medium + "'> <h3>" + song.title_short + "</h3> <p>" + song.artist.name + 
+                    "</p> <audio controls> <source src='" + song.preview + "' type='audio/mpeg'> </audio> <button id='likeButton1' onclick='uploadSong(" + song.id + 
+                    ",)'> &hearts; </button> <button id='dislikeButton' onclick='uploadSong(" + song.id + ",)'> X </button> </div>")
+            });
+        })
+    }
+</script>
 </html>

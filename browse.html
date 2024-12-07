@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VibeZ : Browse</title>
     <link rel="stylesheet" href="FinalProject.css">
+    <script src="finalProject.js"></script>
 </head>
 <body>
     <!-- Top part of each page, includes logo and top navigation -->
@@ -22,105 +23,54 @@
     </div>
         <div class="content">
             <h2> Browse Songs </h2>
+            <!-- grabbing from the Deezer API was returning genres without songs -->
             <div id="genreBar">
-                
-            </div>
-            <div class="toggleButtonDiv">
-                <button class="toggleButton" onclick="toggleGrid()">Change View</button>
+                <button class="genreButton" onclick="getSongsByGenre(0)">All</button>
+                <button class="genreButton" onclick="getSongsByGenre(132)">Pop</button>
+                <button class="genreButton" onclick="getSongsByGenre(116)">Rap/Hip Hop</button>
+                <button class="genreButton" onclick="getSongsByGenre(122)">Reggaeton</button>
+                <button class="genreButton" onclick="getSongsByGenre(152)">Rock</button>
+                <button class="genreButton" onclick="getSongsByGenre(113)">Dance</button>
+                <button class="genreButton" onclick="getSongsByGenre(165)">R&B</button>
+                <button class="genreButton" onclick="getSongsByGenre(85)">Alternative</button>
+                <button class="genreButton" onclick="getSongsByGenre(106)">Electro</button>
+                <button class="genreButton" onclick="getSongsByGenre(144)">Reggae</button>
+                <button class="genreButton" onclick="getSongsByGenre(129)">Jazz</button>
+                <button class="genreButton" onclick="getSongsByGenre(84)">Country</button>
+                <button class="genreButton" onclick="getSongsByGenre(98)">Classical</button>
+                <button class="genreButton" onclick="getSongsByGenre(464)">Metal</button>
+                <button class="genreButton" onclick="getSongsByGenre(153)">Blues</button>
             </div>
             <hr class="songs">
-            <div class="songGrid" id="songGrid1">
-                <!-- song card is used to display a card version of the song -->
-                <!-- <div class="songCard"> -->
-                    <!-- required for display, albumImage:songName:artistName:release the url for spotify is an optional thing to discuss -->
-                    <!-- <img src="images/RickAstley.jpg">
-                    <h3> Never Gonna Give You Up </h3>
-                    <p> Rick Astley, 1987</p>
-                </div> -->
-            </div>
-            <div id="songPages">
+            <div class="songGrid" id="songGrid1"></div>
+            <div id="songPages"></div>
 
-            </div>
+            <!-- used to give popup to user to submit a rating with their song -->
+            <div class="overlay" id="overlay">
+                <div class="popup">
+                  <h2>Rate the Song!</h2>
+                  <div class="rating">
+                    <input type="radio" id="star1" name="rating" value="1">
+                    <label for="star1">1</label>
+                    <input type="radio" id="star2" name="rating" value="2">
+                    <label for="star2">2</label>
+                    <input type="radio" id="star3" name="rating" value="3">
+                    <label for="star3">3</label>
+                    <input type="radio" id="star4" name="rating" value="4">
+                    <label for="star4">4</label>
+                    <input type="radio" id="star5" name="rating" value="5">
+                    <label for="star5">5</label>
+                  </div>
+                  <button id="submitRating" onclick="submitSong()">Submit</button>
+                </div>
+              </div>
         </div>
         <script>
+            // used for page navigation
             let currentIndex = 0;
-            // fetch genres for buttons
-            genreButtons();
             // fetch default songs
             getSongsByGenre(0);
-
-            // used for page navigation
-            
-
-            function genreButtons() {
-                url = "https://harmeets.sgedu.site/genre.php?=" + Date.now();
-                fetch(url)
-                    .then(res => res.text())
-                    .then (data => 
-                    {
-                        let parsedData = JSON.parse(data);
-                        parsedData.data.forEach(genre => {
-                            document.getElementById("genreBar").insertAdjacentHTML("beforeend", "<button onclick='getSongsByGenre(" +  genre.id + ")'>" + genre.name +"</button>")
-                        });
-                    })
-            }
-            
-            function toggleGrid() {
-                const collection = document.getElementsByClassName("songCard");
-                for (let element of collection){
-                    element.classList.toggle("songLine");
-                }
-            }
-
-            // reset songs and display picked genre
-            function getSongsByGenre(genre){
-                resetPage();
-                url = "https://harmeets.sgedu.site/song.php?id=" + genre + "&?date=" + Date.now();
-                updatePage(url,genre);
-                currentIndex = 0;
-            }
-
-            function updatePage(url,genre){
-                fetch (url)
-                .then(res => res.text())
-                .then (data => 
-                {
-                    let parsedData = JSON.parse(data);
-                    parsedData.data.forEach(song => {
-                        document.getElementById("songGrid1").insertAdjacentHTML("beforeend", "<div class='songCard'> <img src=' " + song.album.cover_medium + "'> <h3>" + song.title_short + "</h3> <p>" + song.artist.name + 
-                            "</p> <audio controls> <source src='" + song.preview + "' type='audio/mpeg'> </audio> <button> &hearts; </button> </div>")
-                    });
-                    if (parsedData.prev) {
-                        document.getElementById("songPages").insertAdjacentHTML("beforeend", "<button onclick='goThere(0," + genre +")'> Previous </button>");
-                    }
-                    if (parsedData.next) {
-                        document.getElementById("songPages").insertAdjacentHTML("beforeend", "<button onclick='goThere(1," + genre +");'> Next </button>");
-                    }
-                })
-            }
-
-            function resetPage(){
-                while (document.getElementById("songGrid1").firstChild) {
-                    document.getElementById("songGrid1").removeChild(document.getElementById("songGrid1").firstChild);
-                }
-                while (document.getElementById("songPages").firstChild) {
-                    document.getElementById("songPages").removeChild(document.getElementById("songPages").firstChild);
-                }
-            }
-
-            function goThere(direction, genre){
-                url = "https://harmeets.sgedu.site/goThere.php?direction=" + direction + "&genre=" + genre + "&date=" + Date.now() + "&index=" + currentIndex;
-                if (direction == 1){
-                    currentIndex = currentIndex + 12;
-                }
-                else {
-                    currentIndex = currentIndex - 12;
-                }
-                resetPage();
-                updatePage(url,genre);
-                
-            }
-            </script>
+        </script>
 </body>
 
 </html>
