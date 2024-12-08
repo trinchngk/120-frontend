@@ -78,7 +78,7 @@ hr.songs {
 }
 
 /* Styling for the sections on the Index page */
-#about,#signup {
+#about,#signupBox {
     border: 2px solid #23b1ca;
 }
 #features {
@@ -87,10 +87,11 @@ hr.songs {
 
 #about,#signup,#features {
     margin: 3%;
+    border-radius: 10px; 
 }
 
 /* paragraphs for about and signup section */
-#about p, #signup p {
+#about p, #signupBox p {
     text-align: center;
     font-size: 2vw;
     border-radius: 15px;
@@ -115,10 +116,10 @@ hr.songs {
 /* styling for the feature grid section to make 3 cards */
 .featureItem {
     text-align: center;
-    border-radius: 10px;
     padding: 5%;
     margin-bottom: 5%;
     background-color: #0a0029;
+    border-radius: 30px;
 }
 .featureItem img{
     width: 200px;
@@ -134,7 +135,7 @@ hr.songs {
 }
 
 /* styling for buttons separate from normal buttons in case we need them somewhere else */
-#signup button, .toggleButton, .pageCycle {
+#signupBox button, .toggleButton, .pageCycle {
     background-color: #840052;
     color: white;
     font-size: 1vw;
@@ -145,7 +146,7 @@ hr.songs {
     border-radius: 30px;
 }
 
-#signup button:hover, .toggleButton:hover, .pageCycle:hover {
+#signupBox button:hover, .toggleButton:hover, .pageCycle:hover {
     background-color: white;
     color: #840052;
     border: 2px solid #840052;

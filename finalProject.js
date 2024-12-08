@@ -22,19 +22,39 @@ async function uploadSong(id, genre) {
     overlay.style.display = 'block';
 }
 
-function submitSong(){
+async function submitSong(){
+    const token = localStorage.getItem('token');
     const rating = document.querySelector('input[name="rating"]:checked');
+    
     if (rating) {
+
+        const response = await fetch(`https://harmeets.sgedu.site/submitSong.php?random=${songId}&date=${Date.now()}`, {
+            method: 'GET',
+        });
+        const data = await response.json();
+
+        const title = data.title;
+        const artist = data.artist.name;
+        const album = data.album.title;
+        const published = data.album.release_date;
+        const cover = data.album.cover_medium;
+
         fetch("https://cs120-final-project.vercel.app/api/songs", {
             method: "POST", 
-            body: JSON.stringify({
-                // add body here
-            }),
             headers: {
-                "Content-type": "application/json; charset=UTF-8"
-            }
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                title: title,
+                artist: artist,
+                album: album,
+                published: Number(published.slice(0,4)),
+                genre: genreName,
+                rating: rating.value,
+                cover: cover
+            }),
         })
-
 
         overlay.style.display = 'none';
     } else {
