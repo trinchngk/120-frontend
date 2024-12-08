@@ -9,26 +9,14 @@
 </head>
 <body>
     <!-- Top part of each page, includes logo and top navigation -->
-    <div id="header">
-        <div id="logo">
-            <a href="index.html"><img src="images/VibeZ.png"></a>
-            <button id='signOut' class="toggleButton" style="position: absolute; top: 10px; right: 10px;">Sign Out</button>
-        </div>
-        <div id="topnav">
-            <a href="index.html" class="active">Home</a>
-            <a href="mysongs.html"> My Songs </a>
-            <a href="browse.html"> Browse All </a>
-            <a href="speedsearch.html"> Speed Search </a>
-        </div>
-    </div>
     <!-- ADD A BANNER IMAGE HERE -->
     <div class="content">
         <div id="about">
             <h2>About Us</h2>
-            <p> Discover music that matches your vibe with VibeZ! <br/><br/> Our app is designed to help you explore 
-                and enjoy music tailored to your unique genre preferences. By analyzing your tastes, 
-                we recommend songs and artists you'll love, making it easier than ever to dive deeper into the 
-                sounds that move you. <br/><br/> Whether you're a fan of timeless classics or the latest hits, VibeZ 
+            <p> Discover music that matches your vibe with VibeZ! <br/><br/> Our app is designed to help you keep 
+                track of songs and albums you've listened to, as well as discover and explore new music. Rate each song, 
+                keep track of your favorites, and appeal to your inner music connoisseur.
+                <br/><br/> Whether you're a fan of timeless classics or the latest hits, VibeZ 
                 connects you to music that resonates.</p>
         </div>
         <div id="features">
@@ -51,19 +39,21 @@
                 </div>
             </div>
         </div>
-        <div id="signup">
+        <div id="signupBox">
             <h2>Sign-Up</h2>
             <p>
                 Sign-Up or Login below and enjoy your VibeZ! <br/>
-                <button> Sign-Up </button>
-                <button> Login </button>
+                <button id="signup"> Sign-Up </button>
+                <button id="login"> Login </button>
             </p>
             
         </div>
     </div>
     <script>
-        document.getElementById('signOut').addEventListener('click', function(event) {
-            localStorage.removeItem('token');  
+        document.getElementById('signup').addEventListener('click', function(event) {
+            window.location.href = "signup.html";       
+        });
+        document.getElementById('login').addEventListener('click', function(event) {
             window.location.href = "login.html";       
         });
     </script>

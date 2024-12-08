@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>signup</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <!-- <link rel='stylesheet' type='text/css' media='screen' href='main.css'> -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: "Montserrat", sans-serif;
+            box-sizing: border-box;
+        }
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        h1 {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Signup</h1>
+        <form id='signup'>
+            <div>
+                <label>Email</label>
+                <input name='email' id='email' type='text' placeholder='Email' required>
+            </div>
+            <div>
+                <label>Password</label>
+                <input name='password' id='password' type='text' placeholder='Password' required>
+            </div>
+            <button type='submit' id='submit'>Signup</button>
+        </form>
+        <p><a href='login.html'>Login</a></p>
+    </div>
+</body>
+    <script>
+        document.getElementById('signup').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            res = fetch('https://cs120-final-project.vercel.app/api/users/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: password
+                })
+            })
+            .then(response => response.json())
+            .then(data => { 
+                console.log(data);
+            })
+            .catch(error => {
+                console.log(error);
+            });            
+        });
+    </script>
+</html>
