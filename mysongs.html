@@ -10,6 +10,7 @@
     <div id="header">
         <div id="logo">
             <a href="index.html"><img src="images/VibeZ.png"></a>
+            <button id='signOut' class="toggleButton" style="position: absolute; top: 10px; right: 10px;">Sign Out</button>
         </div>
         <div id="topnav">
             <a href="index.html">Home</a>
@@ -25,18 +26,32 @@
         </div>
     
 <script>
-url = "https://cs120-final-project.vercel.app/api/songs";
-fetch(url)
-    .then(res => res.text())
-    .then (data => 
-    {
-        let parsedData = JSON.parse(data);
+    document.getElementById('signOut').addEventListener('click', function(event) {
+        localStorage.removeItem('token');  
+        window.location.href = "login.html";       
+    });
+    
+    const token = localStorage.getItem('token');
+
+    console.log(token);
+
+    res = fetch('https://cs120-final-project.vercel.app/api/songs', {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${token}`
+        },
+    })
+    .then(response => response.json())
+    .then(data => { 
+        let parsedData = data;
         console.log(parsedData)
         parsedData.data.forEach(song => {
             document.getElementById("songGrid1").insertAdjacentHTML("beforeend", "<div class='songCard'> <img src=' " + song.cover + "'> <h3>" + song.title + "</h3> <p>" + song.artist + ", " + song.published + "</p></div>")
         });
     })
-.catch (error => console.log(error));
+    .catch(error => {
+        console.log(error);
+    });            
 
 function toggleGrid() {
     const collection = document.getElementsByClassName("songCard");
