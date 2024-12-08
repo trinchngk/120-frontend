@@ -19,7 +19,21 @@ async function getGenre(genre) {
 async function uploadSong(id, genre) {
     songId = id;
     genreName = await getGenre(genre);
+    genreName = genreName.replace(/\s+/g, '');
     overlay.style.display = 'block';
+}
+
+async function removeSong(id){
+    const token = localStorage.getItem('token');
+    await fetch("https://cs120-final-project.vercel.app/api/songs/" + id, {
+        method: "DELETE",
+        headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json"
+        }
+    }
+    );
+    location.reload();
 }
 
 async function submitSong(){
