@@ -9,21 +9,19 @@
 <body>
     <!-- Top part of each page, includes logo and top navigation -->
     <div id="header">
-        <div id="logo">
-            <a href="index.html"><img src="images/VibeZ.png"></a>
-            <button id='signOut' class="toggleButton" style="position: absolute; top: 10px; right: 10px;">Sign Out</button>
-        </div>
-        <div id="topnav">
-            <a href="index.html">Home</a>
-            <a href="mysongs.html" class="active"> My Songs </a>
-            <a href="browse.html"> Browse All </a>
-            <a href="speedsearch.html"> Speed Search </a>
-        </div>
+        <nav>
+            <ul>
+                <li><a href="mysongs.html"> My Songs </a></li>
+                <li><a href="browse.html"> Browse All </a></li>
+                <li><a href="speedsearch.html" class="active"> Speed Search </a></li>
+                <li><a id='signOut' href="login.html" class="active"> Signout </a></li>
+            </ul>
+        </nav>
     </div>
         <div class="content">
             <h2> My Songs </h2>
             <hr class="songs">
-            <div id="emptyMessage"></div>
+            <div style="display: block" id="emptyMessage"></div>
             <div class="songGrid" id="songGrid2"></div>
         </div>
         <div class="overlay" id="overlay">
@@ -66,24 +64,31 @@
         let parsedData = data;
         if (data.count == 0){
             document.getElementById("emptyMessage").insertAdjacentHTML("beforeend", "<p>Head over to <a href='browse.html'> BROWSE </a> or <a href='speedsearch.html'> SPEED SEARCH </a> to add some songs!</p>");
-        }
-        console.log(parsedData)
-        parsedData.data.forEach(song => {
-            let stars = "";
-            for (let i = 0; i < song.rating; i++) {
-                stars = stars + "★";
-            }
+        } else {
+            document.getElementById("emptyMessage").style.display = "none";
+            console.log(parsedData)
+            parsedData.data.forEach(song => {
+                let stars = "";
+                for (let i = 0; i < song.rating; i++) {
+                    stars = stars + "★";
+                }
 
-            document.getElementById("songGrid2").insertAdjacentHTML("beforeend", 
-                `<div class='songCard1'> 
-                    <img src='${song.cover}'> 
-                    <h3>${song.title}</h3> 
-                    <p>${song.artist}, ${song.published}</p>
-                    <p>${stars}</p>
-                    <button onclick='openRating("${String(song._id)}")'>Rate</button>
-                    <button id='dislikeButton' onclick='removeSong("${String(song._id)}");'>Remove</button>
-                </div>`)
-        });
+                document.getElementById("songGrid2").insertAdjacentHTML("beforeend", 
+                    `<div class='songCard1'> 
+                        <img src='${song.cover}'> 
+                        <h3>${song.title}</h3> 
+                        <p>${song.artist}, ${song.published}</p>
+                        <p>${stars}</p>
+                        <div style="display: flex; justify-content:space-evenly; width: full">
+                            <button class="button" onclick='openRating("${String(song._id)}")'>Rate</button>
+                            <button class="button" onclick='removeSong("${String(song._id)}");'>Remove</button>                        
+                        </div>
+
+                    </div>`)
+            });            
+        }
+
+
     })
     .catch(error => {
         console.log(error);

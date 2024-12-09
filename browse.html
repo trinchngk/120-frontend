@@ -11,16 +11,14 @@
 <body>
     <!-- Top part of each page, includes logo and top navigation -->
     <div id="header">
-        <div id="logo">
-            <a href="index.html"><img src="images/VibeZ.png"></a>
-            <button id='signOut' class="toggleButton" style="position: absolute; top: 10px; right: 10px;">Sign Out</button>
-        </div>
-        <div id="topnav">
-            <a href="index.html">Home</a>
-            <a href="mysongs.html" > My Songs </a>
-            <a href="browse.html" class="active"> Browse All </a>
-            <a href="speedsearch.html"> Speed Search </a>
-        </div>
+        <nav>
+            <ul>
+                <li><a href="mysongs.html"> My Songs </a></li>
+                <li><a href="browse.html"> Browse All </a></li>
+                <li><a href="speedsearch.html" class="active"> Speed Search </a></li>
+                <li><a id='signOut' href="login.html" class="active"> Signout </a></li>
+            </ul>
+        </nav>
     </div>
         <div class="content">
             <h2> Browse Songs </h2>

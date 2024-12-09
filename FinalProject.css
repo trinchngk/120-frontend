@@ -16,14 +16,14 @@
     and utilize different shades if something does not look good
 
 */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-@font-face {
-    font-family: IcelandRegular;
-    src: url(fonts/Iceland-Regular.ttf);
-}
+/* @font-face {
+    font-family: "Montserrat", sans-serif;
+} */
 
 body {
-    font-family: IcelandRegular;
+    font-family: 'Montserrat', sans-serif;
     background-color: #1a061a;
     color: white;
 }
@@ -33,9 +33,9 @@ body {
 */
 h2 {
     text-align: center;
-    font-size: 3vw;
-    text-decoration: underline ;
-    margin-bottom: 0;
+    font-size: 40px;
+    margin-bottom: 30px;
+
 }
 
 hr.songs {
@@ -47,46 +47,62 @@ hr.songs {
 #logo {
     width: 100%;
     text-align: center;
-    background-color: #3c6176;
 }
 
 #logo img {
     scale: 1.2;
 }
-#topnav {
-    background-color: #39093f;
-    overflow: hidden;
+
+nav {
+    display: flex;
+    justify-content:space-evenly;
+    margin: 20px;
 }
 
-#topnav a {
-    float: left;
-    color: white;
-    background-color: #840052;
+nav ul {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    flex: 1;
+    list-style: none;
+    border-radius: 50px;
     text-align: center;
-    padding: 0.6% 5%;
+    transition: background-color 0.3s ease;
+}
+
+nav ul li:hover {
+    background-color: #840052;
+}
+
+nav ul li a {
+    color: #fff;
     text-decoration: none;
-    font-size: 1vw;
-}
-
-#topnav a:hover {
-    color: #840052;
-    background-color: white;
-}
-
-#topnav .active {
-    background-color: #39093f;
+    display: block;
+    padding: 10%;
 }
 
 /* Styling for the sections on the Index page */
 #about,#signupBox {
     border: 2px solid #23b1ca;
+    border-radius: 15px;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
+
 #features {
     border: 2px solid #db1696;
 }
 
 #about,#signup,#features {
-    margin: 3%;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
     border-radius: 10px; 
 }
 
@@ -95,9 +111,10 @@ hr.songs {
     text-align: center;
     font-size: 2vw;
     border-radius: 15px;
-    background-color: #0a0029;
     padding: 2%;
     margin-bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* grid used to show features, easy to display the 3 side by side */
@@ -136,20 +153,23 @@ hr.songs {
 
 /* styling for buttons separate from normal buttons in case we need them somewhere else */
 #signupBox button, .toggleButton, .pageCycle {
+    font-family: 'Montserrat', sans-serif;
     background-color: #840052;
     color: white;
-    font-size: 1vw;
-    margin: 1%;
-    padding: 1%;
-    width: 10%;
-    border: 2px solid white;
-    border-radius: 30px;
+    border: 1px solid #840052;
+    padding: 10px 30px;
+    font-size: 15px;
+    margin-top: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    text-align: center;
 }
 
 #signupBox button:hover, .toggleButton:hover, .pageCycle:hover {
     background-color: white;
     color: #840052;
-    border: 2px solid #840052;
+    transform: scale(1.05);
 }
 
 .toggleButtonDiv, #songPages {
@@ -206,9 +226,15 @@ hr.songs {
 }
 
 #genreBar {
-    margin-top: 0.5%;
-    margin-bottom: 1%;
-    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+#genreBar > :nth-child(n+5) {
+
+    display: block;
 }
 
 .songLine button {
@@ -283,7 +309,7 @@ hr.songs {
   }
   
   .popup .rating label {
-    font-size: 2vw;
+    font-size: 25px;
     cursor: pointer;
     display: flex;
     justify-content: center;
@@ -296,6 +322,7 @@ hr.songs {
   }
 
   .popup button {
+    font-family: 'Montserrat', sans-serif;
     margin-top: 10px;
     padding: 5px 10px;
     background: #840052;
@@ -313,20 +340,23 @@ hr.songs {
   .genreButton {
     color: white;
     background-color: #8b62c2;
-    font-size: 1vw;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
     border: 2px solid #8b62c2;
+    cursor: pointer;
+    border-radius: 10px;
   }
 
   .genreButton:hover {
     border: 2px solid #23b1ca;
   }
-  .songCard {
+.songCard {
     background-color: #39093f;
     border: 2px solid #23b1ca;
     border-radius: 15px;
     padding: 2vw;
     text-align: center;
-    width: 30vw;
+    width: 300px;
 }
 
 .songCard img {
@@ -374,19 +404,16 @@ hr.songs {
     background-color: #ec67b6;
 }
 
-  @media screen and (max-width:1000px){
-    .songLine audio {
-        width: 20vw;
-    }
-}
-
 .songCard1 {
     background-color: #0a0029;
     border-radius: 15px;
     margin: 0.5vw;
-    padding: 0.25vw;
+    padding: 0.5vw;
+    justify-content: center;
+    align-items: center;
     text-align: center;
     width: 20vw;
+
 }
 .songCard1:nth-child(3n+1){
     border: 2px solid #ea68b6;
@@ -415,19 +442,21 @@ hr.songs {
 }
 
 .songCard1 button {
-    padding: 0.2vw 0.5vw;
-    margin-bottom: 0.7vw;
-    width: 5vw;
-    height: auto;
-    font-size: 0.8vw;
-    color: white;
-    background-color: #840052;
-    border: 2px solid #ea68b6;
-    border-radius: 30px;
+    font-family: 'Montserrat', sans-serif;
+    display: block;
+    border: 1px solid #840052;
+    color: #ffffff;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    background: #840052;  
+    padding: 10px 20px;
+    font-size: 15px;
+    margin-top: 10px;
+    cursor: pointer;  
+    border-radius: 10px;
 }
 
 .songCard1 button:hover {
-    background-color: #ea68b6;
+    transform: scale(1.05);
 }
 
 #emptyMessage {
@@ -447,4 +476,114 @@ hr.songs {
 }
 #emptyMessage a:hover{
     color: #cb118b;
+}
+
+.button {
+    display: block;
+    border: 1px solid #ffffff;
+    color: #840052;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    background: #ffffff;  
+    padding: 10px 30px;
+    font-size: 15px;
+    margin-top: 20px;
+    cursor: pointer;  
+    border-radius: 10px;
+}
+
+.button:hover{
+    transform: scale(1.05);
+}
+
+form input {
+    width: 100%;
+    outline: none;
+    padding: 15px;
+    margin: 10px 0;
+    color: #840052;
+    font-size: 15px;
+    border: 2px solid #840052;
+    border-radius: 10px;
+}
+
+#songGrid3 {
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    max-width: min-content;
+}
+
+#songGrid3 img{
+    width: 300px;
+    height: 300px;
+}
+
+.songCard2 {
+    background-color: #39093f;
+    border: 2px solid #23b1ca;
+    border-radius: 15px;
+    padding: 2vw;
+    text-align: center;
+    width: 300px;
+}
+
+.songCard2 img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 1vw;
+}
+
+.songCard2 h3 {
+    color: #ec67b6;
+    font-size: 20px;
+    margin: 0.5vw 0;
+}
+
+.songCard2 p {
+    color: #8b62c2;
+    font-size: 15px;
+    font-style: italic;
+    margin: 0.5vw 0;
+}
+
+.songCard2 audio {
+    width: 100%;
+    margin: 1vw 0;
+}
+
+.songCard2 button {
+    background-color: #572aa4;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 3vw;
+    height: 3vw;
+    margin: 0 1vw;
+    font-size: 1.5vw;
+}
+
+.songCard2 button:hover {
+    background-color: #cb118b;
+}
+
+.songCard2 button:active {
+    background-color: #ec67b6;
+}
+
+
+
+@media screen and (max-width:1000px){
+    .songLine audio {
+        width: 20vw;
+    }
+}
+
+@media screen and (max-width: 500px) {
+
+    #genreBar > :nth-child(n+5) {
+        display: none;
+    }
 }
