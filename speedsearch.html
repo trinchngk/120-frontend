@@ -27,6 +27,25 @@
 
             </div>
         </div>
+        <!-- used to give popup to user to submit a rating with their song -->
+        <div class="overlay" id="overlay">
+            <div class="popup">
+              <h2>Rate the Song!</h2>
+              <div class="rating">
+                <input type="radio" id="star1" name="rating" value="1">
+                <label for="star1">1</label>
+                <input type="radio" id="star2" name="rating" value="2">
+                <label for="star2">2</label>
+                <input type="radio" id="star3" name="rating" value="3">
+                <label for="star3">3</label>
+                <input type="radio" id="star4" name="rating" value="4">
+                <label for="star4">4</label>
+                <input type="radio" id="star5" name="rating" value="5">
+                <label for="star5">5</label>
+              </div>
+              <button id="submitRating" onclick="submitSong()">Submit</button>
+            </div>
+          </div>
     </div>
 <script>
     document.getElementById('signOut').addEventListener('click', function(event) {
@@ -37,9 +56,56 @@
 </body>
 <script>
     getRandomSong();
-    function getRandomSong(){
-        randomNumber = Math.floor(Math.random() * 101);
-        url = "https://harmeets.sgedu.site/getRandomSong.php?&date=" + Date.now() + "&random=" + randomNumber;
+    async function getRandomSong(){
+        const token = localStorage.getItem('token');
+        genreRatings = new Map();
+
+        await fetch("https://cs120-final-project.vercel.app/api/songs", {
+            method: "GET", 
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.count == 0){
+                genre = "All";
+                rating = 50;
+                genreRatings.set(genre, rating);
+            }
+            data.data.forEach(song => {
+                genre = song.genre;
+                rating = song.rating;
+
+                if (genreRatings.has(genre)){
+                    genreRatings.set(genre, genreRatings.get(genre) + rating);
+                }
+                else {
+                    genreRatings.set(genre, rating);
+                }
+            });
+        })
+        .catch(error => {
+            console.error("Error fetching songs:", error); 
+        });
+
+
+        let favoriteGenre = null;
+        let favoriteRating = 0;
+
+        genreRatings.forEach((currentTotal, currentGenre) => {
+            if (currentTotal > favoriteRating){
+                favoriteRating = currentTotal;
+                favoriteGenre = currentGenre;
+            }
+        });
+
+        while (document.getElementById("songGrid1").firstChild) {
+            document.getElementById("songGrid1").removeChild(document.getElementById("songGrid1").firstChild);
+        }
+
+        randomNumber = Math.floor(Math.random() * 10);
+        url = "https://harmeets.sgedu.site/getRandomSong.php?&date=" + Date.now() + "&genre=" + favoriteGenre;
         fetch (url)
         .then(res => res.text())
         .then (data => 
@@ -48,7 +114,7 @@
             parsedData.data.forEach(song => {
                 document.getElementById("songGrid1").insertAdjacentHTML("beforeend", "<div class='songCard'> <img src=' " + song.album.cover_medium + "'> <h3>" + song.title_short + "</h3> <p>" + song.artist.name + 
                     "</p> <audio controls> <source src='" + song.preview + "' type='audio/mpeg'> </audio> <button id='likeButton1' onclick='uploadSong(" + song.id + 
-                    ",)'> &hearts; </button> <button id='dislikeButton' onclick='uploadSong(" + song.id + ",)'> X </button> </div>")
+                    "); getRandomSong();'> &hearts; </button> <button id='dislikeButton' onclick='getRandomSong()'> X </button> </div>")
             });
         })
     }

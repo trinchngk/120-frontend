@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <title>VibeZ : My Songs</title>
     <link rel="stylesheet" href="FinalProject.css">
+    <script src="finalProject.js"></script>
 </head>
 <body>
     <!-- Top part of each page, includes logo and top navigation -->
@@ -22,7 +23,8 @@
         <div class="content">
             <h2> My Songs </h2>
             <hr class="songs">
-            <div class="songGrid" id="songGrid1"></div>
+            <div id="emptyMessage"></div>
+            <div class="songGrid" id="songGrid2"></div>
         </div>
     
 <script>
@@ -44,21 +46,19 @@
     .then(response => response.json())
     .then(data => { 
         let parsedData = data;
+        if (data.count == 0){
+            document.getElementById("emptyMessage").insertAdjacentHTML("beforeend", "<p>Head over to <a href='browse.html'> BROWSE </a> or <a href='speedsearch.html'> SPEED SEARCH </a> to add some songs!</p>");
+        }
         console.log(parsedData)
         parsedData.data.forEach(song => {
-            document.getElementById("songGrid1").insertAdjacentHTML("beforeend", "<div class='songCard'> <img src=' " + song.cover + "'> <h3>" + song.title + "</h3> <p>" + song.artist + ", " + song.published + "</p></div>")
+            id = String(song._id);
+            document.getElementById("songGrid2").insertAdjacentHTML("beforeend", "<div class='songCard1'> <img src=' " + song.cover + "'> <h3>" + song.title + "</h3> <p>" + song.artist + ", " + song.published + "</p><p>Rating: " + song.rating + 
+                "</p><button id='dislikeButton' onclick='removeSong(\"" + id + "\");'> REMOVE </button></div>")
         });
     })
     .catch(error => {
         console.log(error);
     });            
-
-function toggleGrid() {
-    const collection = document.getElementsByClassName("songCard");
-    for (let element of collection){
-        element.classList.toggle("songLine");
-    }
-}
 </script>
 </body>
 </html>

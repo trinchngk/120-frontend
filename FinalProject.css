@@ -195,6 +195,7 @@ hr.songs {
 .songLine img {
     width: 7vw;
     margin-right: 1rem;
+    border-radius: 10px;
 }
 .songLine h3, .songLine p {
     font-size: 2vw;
@@ -321,6 +322,7 @@ hr.songs {
   }
   .songCard {
     background-color: #39093f;
+    border: 2px solid #23b1ca;
     border-radius: 15px;
     padding: 2vw;
     text-align: center;
@@ -376,4 +378,72 @@ hr.songs {
     .songLine audio {
         width: 20vw;
     }
+}
+
+.songCard1 {
+    background-color: #0a0029;
+    border-radius: 15px;
+    margin: 0.5vw;
+    padding: 0.25vw;
+    text-align: center;
+    width: 20vw;
+}
+.songCard1:nth-child(3n+1){
+    border: 2px solid #ea68b6;
+}
+.songCard1:nth-child(3n+2){
+    border: 2px solid #8b62c2;
+}
+.songCard1:nth-child(3n+3){
+    border: 2px solid #23b1ca;
+}
+
+.songCard1 img {
+    width: 15vw;
+    height: 15vw;
+    border-radius: 10px;
+}
+
+.songCard1 h3 {
+    font-size: 2vw;
+    padding: 0;
+    margin: 0;
+}
+
+.songCard1 p {
+    font-size: 1vw;
+}
+
+.songCard1 button {
+    margin-bottom: 0.7vw;
+    width: 5vw;
+    height: 1vw;
+    
+    color: white;
+    background-color: #840052;
+    border: 2px solid #ea68b6;
+    border-radius: 30px;
+}
+
+.songCard1 button:hover {
+    background-color: #ea68b6;
+}
+
+#emptyMessage {
+    text-align: center;
+    font-size: 2vw;
+    background-color: #39093f;
+    padding: 0.5vw;
+    line-height: 1vw;
+    border-radius: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: fit-content;
+}
+#emptyMessage a{
+    text-decoration: none;
+    color: #23b1ca;
+}
+#emptyMessage a:hover{
+    color: #cb118b;
 }
