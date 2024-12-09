@@ -26,8 +26,28 @@
             <div id="emptyMessage"></div>
             <div class="songGrid" id="songGrid2"></div>
         </div>
+        <div class="overlay" id="overlay">
+            <div class="popup">
+                <h2>Rate the Song!</h2>
+                <div class="rating">
+                <input type="radio" id="star1" name="rating" value="1">
+                <label for="star1">1</label>
+                <input type="radio" id="star2" name="rating" value="2">
+                <label for="star2">2</label>
+                <input type="radio" id="star3" name="rating" value="3">
+                <label for="star3">3</label>
+                <input type="radio" id="star4" name="rating" value="4">
+                <label for="star4">4</label>
+                <input type="radio" id="star5" name="rating" value="5">
+                <label for="star5">5</label>
+                </div>
+                <button id="submitRating" onclick="updateSong()">Submit</button>
+            </div>
+            </div>
+        </div>
     
 <script>
+
     document.getElementById('signOut').addEventListener('click', function(event) {
         localStorage.removeItem('token');  
         window.location.href = "login.html";       
@@ -35,9 +55,7 @@
     
     const token = localStorage.getItem('token');
 
-    console.log(token);
-
-    res = fetch('https://cs120-final-project.vercel.app/api/songs', {
+    let res = fetch('https://cs120-final-project.vercel.app/api/songs', {
         method: 'GET',
         headers: {
             Authorization: `Bearer ${token}`
@@ -51,14 +69,32 @@
         }
         console.log(parsedData)
         parsedData.data.forEach(song => {
-            id = String(song._id);
-            document.getElementById("songGrid2").insertAdjacentHTML("beforeend", "<div class='songCard1'> <img src=' " + song.cover + "'> <h3>" + song.title + "</h3> <p>" + song.artist + ", " + song.published + "</p><p>Rating: " + song.rating + 
-                "</p><button id='dislikeButton' onclick='removeSong(\"" + id + "\");'> REMOVE </button></div>")
+            let stars = "";
+            for (let i = 0; i < song.rating; i++) {
+                stars = stars + "★";
+            }
+
+            document.getElementById("songGrid2").insertAdjacentHTML("beforeend", 
+                `<div class='songCard1'> 
+                    <img src='${song.cover}'> 
+                    <h3>${song.title}</h3> 
+                    <p>${song.artist}, ${song.published}</p>
+                    <p>${stars}</p>
+                    <button onclick='openRating("${String(song._id)}")'>Rate</button>
+                    <button id='dislikeButton' onclick='removeSong("${String(song._id)}");'>Remove</button>
+                </div>`)
         });
     })
     .catch(error => {
         console.log(error);
-    });            
+    });
+
+function toggleGrid() {
+    const collection = document.getElementsByClassName("songCard");
+    for (let element of collection){
+        element.classList.toggle("songLine");
+    }
+}
 </script>
 </body>
 </html>

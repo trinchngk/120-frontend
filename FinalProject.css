@@ -415,10 +415,11 @@ hr.songs {
 }
 
 .songCard1 button {
+    padding: 0.2vw 0.5vw;
     margin-bottom: 0.7vw;
     width: 5vw;
-    height: 1vw;
-    
+    height: auto;
+    font-size: 0.8vw;
     color: white;
     background-color: #840052;
     border: 2px solid #ea68b6;
