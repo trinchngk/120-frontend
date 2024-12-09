@@ -5,7 +5,7 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>login</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <!-- <link rel='stylesheet' type='text/css' media='screen' href='main.css'> -->
+    <link rel="stylesheet" href="FinalProject.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <style>
         *{
@@ -20,17 +20,13 @@
             align-items: center;
             justify-content: center;
         }
-        h1 {
-            margin-bottom: 30px;
-            text-align: center;
-        }
     </style>
 </head>
 <body>
     <div>
-        <h1>Login</h1>
+        <h2>Login</h2>
         <form id='login'>
-            <div>
+            <div style="margin-bottom: 10px;">
                 <label>Email</label>
                 <input name='email' id='email' type='text' placeholder='Email' required>
             </div>
@@ -38,9 +34,11 @@
                 <label>Password</label>
                 <input name='password' id='password' type='text' placeholder='Password' required>
             </div>
-            <button type='submit' id='submit'>Login</button>
-        </form>
-        <p><a href='signup.html'>Sign-Up</a></p>        
+            <div style="display: flex;">
+                <button class="button" type='submit' id='submit'>Login</button>
+                <p><a class="button" style="margin-left: 10px; text-decoration: none;" href='signup.html'>Sign-Up Page</a></p>                
+            </div>
+        </form> 
     </div>
 </body>
     <script>
