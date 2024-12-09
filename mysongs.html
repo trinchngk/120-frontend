@@ -55,8 +55,6 @@
     
     const token = localStorage.getItem('token');
 
-    console.log(token);
-
     let res = fetch('https://cs120-final-project.vercel.app/api/songs', {
         method: 'GET',
         headers: {
@@ -77,13 +75,13 @@
             }
 
             document.getElementById("songGrid2").insertAdjacentHTML("beforeend", 
-                `<div class='songCard'> 
+                `<div class='songCard1'> 
                     <img src='${song.cover}'> 
                     <h3>${song.title}</h3> 
                     <p>${song.artist}, ${song.published}</p>
                     <p>${stars}</p>
                     <button onclick='openRating("${String(song._id)}")'>Rate</button>
-                    <button id='dislikeButton' onclick='removeSong("${String(song._id)}");'> REMOVE </button>
+                    <button id='dislikeButton' onclick='removeSong("${String(song._id)}");'>Remove</button>
                 </div>`)
         });
     })
