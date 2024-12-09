@@ -76,6 +76,60 @@ async function submitSong(){
     }
 }
 
+function openRating(id) {
+    songId = id
+    overlay.style.display = 'block';
+}
+
+async function updateSong(){
+    const token = localStorage.getItem('token');
+    
+    const response = await fetch(`https://cs120-final-project.vercel.app/api/songs/${songId}`, {
+            method: "GET", 
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json"
+            },
+        })
+    
+    const data = await response.json();
+
+    const title = data.title;
+    const artist = data.artist;
+    const album = data.album;
+    const published = data.published;
+    const genre = data.genre;
+    const cover = data.cover;
+
+    const rating = document.querySelector('input[name="rating"]:checked');
+    
+    if (rating) {
+
+        fetch(`https://cs120-final-project.vercel.app/api/songs/${songId}`, {
+            method: "PUT", 
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                title: title,
+                artist: artist,
+                album: album,
+                published: published,
+                genre: genre,
+                rating: rating.value,
+                cover: cover
+            }),
+        })
+
+        overlay.style.display = 'none';
+        location.reload();
+        
+    } else {
+        alert('Please select a rating.');
+    }
+}
+
 function updatePage(url,genre){
     fetch (url)
     .then(res => res.text())
